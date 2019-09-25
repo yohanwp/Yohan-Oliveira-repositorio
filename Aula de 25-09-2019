@@ -1,0 +1,59 @@
+enable
+clock set (Hora:Min:sec) (dia:mês:ano)  
+configure terminal
+hostname SW-CORE
+banner motd "ACESSO AUTORIZADO PARA O GRUPO 2"
+enable secret ted16m12
+crypto key generate rsa general-keys modulus 1024
+username Kaiky privilege 15 secret Batata01
+username Yohan privilege 15 secret Batata01
+username Lucas privilege 15 secret Batata01
+usernama Augusto privilege 15 secret Batata01
+line console 0
+password ted16m12
+login
+exit
+service password-encryption
+line vty 0 15
+password SenhadaVTY
+transport input ssh
+exec-timeout 9
+login local
+exit
+vlan 10
+name 10
+vlan 20
+name 20
+vlan 30
+name 30
+vlan 99
+name native
+exit
+interface vlan 10
+ip address 192.168.2.158 255.255.255.224
+description vlan 10
+interface vlan 20
+ip address 192.168.2.126 255.255.255.128
+description vlan 20
+interface vlan 30
+ip address 192.168.2.174 255.255.255.240
+interface g0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,30
+exit
+ip default-gateway 192.168.2.1
+interface f0/1
+switchport mode access
+switchport access vlan 10
+description rede-vlan10
+interface f0/2
+switchport mode access
+switchport access vlan 20
+description rede-vlan20
+interface f0/3
+switchport mode access
+switchport access vlan 30
+description rede-vlan30
+exit
+do wr
