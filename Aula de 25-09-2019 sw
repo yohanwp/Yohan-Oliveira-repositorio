@@ -1,59 +1,537 @@
 enable
-clock set (Hora:Min:sec) (dia:mês:ano)  
 configure terminal
-hostname SW-CORE
-banner motd "ACESSO AUTORIZADO PARA O GRUPO 2"
-enable secret ted16m12
-crypto key generate rsa general-keys modulus 1024
-username Kaiky privilege 15 secret Batata01
+hostname SW-CORE-31
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS"
+enable secret SenhadaEnable
 username Yohan privilege 15 secret Batata01
+username Augusto privilege 15 secret Batata01
 username Lucas privilege 15 secret Batata01
-usernama Augusto privilege 15 secret Batata01
+username Kaiky privilege 15 secret Batata01
+ip domain-name peachanddaisy.local
+crypto key generate rsa general-keys modulus 1024
 line console 0
-password ted16m12
+login local
+exec-timeout 10
+line vty 0 15
+transport input ssh
+login local
+exec-timeout 10
+exit
+service password-encryption
+interface vlan 100
+ip address 172.16.4.197 255.255.255.224
+interface vlan 100
+ip address 172.16.4.222 255.255.255.224
+no shutdown
+exit
+ip default-gateway 172.16.4.1
+interface gigabitethernet 1/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,10
+description CONEXAO COM SWITCH-31
+exit
+interface gigabitethernet 2/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,10
+description CONEXAO COM SWITCH-32
+exit
+interface gigabitethernet 0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,100
+description CONEXAO COM RT-31
+exit
+interface gigabitethernet 3/1
+switchport mode access
+switchport access vlan 100
+description CONEXAO COM SRV-31
+no shutdown
+do wr
+
+--------------------------------------------------------
+
+SW-12
+
+
+
+
+enable 
+configure terminal
+hostname SW-12
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS"
+enable secret SenhadaEnable
+username Yohan privilege 15 secret Batata01
+username Augusto privilege 15 secret Batata01
+username Lucas privilege 15 secret Batata01
+username Kaiky privilege 15 secret Batata01
+ip domain-name peachanddaisy.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+login local
+exec-timeout 10
+line vty 0 15
+transport input ssh
+login local
+exec-timeout 10
+exit
+service password-encryption
+ip default-gateway 172.16.1.129
+vlan 10
+name VLAN10
+vlan 20
+name VLAN20
+vlan 100
+name GERENCIAMENTO
+interface fastEthernet 0/1
+switchport mode access
+switchport access vlan 10
+description PC-13
+interface fastEthernet 0/2
+switchport mode access
+switchport access vlan 20
+description PC-14
+interface fastEthernet 0/24
+switchport mode access
+switchport access vlan 100
+description SRV
+interface gigabitEthernet 0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,100
+description TRUNK ROUTER
+interface vlan 10
+ip address 172.16.1.11 255.255.255.128
+interface vlan 20
+ip address 172.16.0.11 255.255.255.0
+interface vlan 100
+ip address 172.16.1.133 255.255.255.240
+interface vlan 100 
+ip address 172.16.1.140 255.255.255.240
+no shutdown
+do wr
+
+------------------------------------------
+
+
+SW-CORE-11
+
+
+
+enable
+configure terminal
+hostname SW-CORE-11
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS"
+enable secret SenhadaEnable
+username Yohan privilege 15 secret Batata01
+username Augusto privilege 15 secret Batata01
+username Lucas privilege 15 secret Batata01
+username Kaiky privilege 15 secret Batata01
+ip domain-name peachanddaisy.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+login local
+exec-timeout 10
+line vty 0 15
+transport input ssh
+login local
+exec-timeout 10
+exit
+service password-encryption
+interface vlan 100
+ip address 172.16.1.133 255.255.255.240
+interface vlan 100
+ip address 172.16.1.142 255.255.255.240
+no shutdown
+exit
+ip default-gateway 172.16.0.1
+interface gigabitethernet 1/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,10
+description CONEXAO COM SWITCH-11
+exit
+interface gigabitethernet 2/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,10
+description CONEXAO COM SWITCH-12
+exit
+interface gigabitethernet 0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,100
+description CONEXAO COM RT-11
+exit
+interface gigabitethernet 3/1
+switchport mode access
+switchport access vlan 100
+description CONEXAO COM SRV-11
+no shutdown
+do wr
+
+------------------------------------------------------
+
+
+SW-CORE-21
+
+
+
+enable
+configure terminal
+hostname SW-CORE-21
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS"
+enable secret SenhadaEnable
+username Yohan privilege 15 secret Batata01
+username Augusto privilege 15 secret Batata01
+username Lucas privilege 15 secret Batata01
+username Kaiky privilege 15 secret Batata01
+ip domain-name peachanddaisy.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+login local
+exec-timeout 10
+line vty 0 15
+transport input ssh
+login local
+exec-timeout 10
+exit
+service password-encryption
+interface vlan 100
+ip address 172.16.3.5 255.255.255.224
+interface vlan 100 
+ip address 172.16.3.30 255.255.255.224
+no shutdown
+exit
+ip default-gateway 172.16.2.1
+interface gigabitethernet 1/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,10
+description CONEXAO COM SWITCH-21
+exit
+interface gigabitethernet 2/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,10
+description CONEXAO COM SWITCH-22
+exit
+interface gigabitethernet 0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,100
+description CONEXAO COM RT-21
+exit
+interface gigabitethernet 3/1
+switchport mode access
+switchport access vlan 100
+description CONEXAO COM SRV-21
+no shutdown
+do wr
+
+---------------------------------------------------------
+
+SW-11
+
+
+enable 
+configure terminal
+hostname SW-11
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS"
+enable secret SenhadaEnable
+username Yohan privilege 15 secret Batata01
+username Augusto privilege 15 secret Batata01
+username Lucas privilege 15 secret Batata01
+username Kaiky privilege 15 secret Batata01
+ip domain-name peachanddaisy.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+login local
+exec-timeout 10
+line vty 0 15
+transport input ssh
+login local
+exec-timeout 10
+exit
+service password-encryption
+ip default-gateway 172.16.1.129
+vlan 10
+name VLAN10
+vlan 20
+name VLAN20
+vlan 100
+name GERENCIAMENTO
+interface fastEthernet 0/1
+switchport mode access
+switchport access vlan 10
+description PC-11
+interface fastEthernet 0/2
+switchport mode access
+switchport access vlan 20
+description PC-12
+interface fastEthernet 0/24
+switchport mode access
+switchport access vlan 100
+description SRV
+interface gigabitEthernet 0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,100
+description TRUNK ROUTER
+interface vlan 10
+ip address 172.16.1.10 255.255.255.128
+interface vlan 20
+ip address 172.16.0.10 255.255.255.0
+interface vlan 100
+ip address 172.16.1.133 255.255.255.240
+interface vlan 100 
+ip addres 172.16.1.141 255.255.255.240
+no shutdown
+do wr
+
+------------------------------------------------------------
+
+SW-21
+
+
+
+enable
+configure terminal
+hostname SW-21
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS"
+enable secret SenhadaEnable
+ip domain-name rede1.local
+crypto key generate rsa general-keys modulus 1024
+username Yohan privilege 15 secret Batata01
+username Augusto privilege 15 secret Batata01
+username Lucas privilege 15 secret Batata01
+username Kaiky privilege 15 secret Batata01
+line console 0
+password SenhadaConsole
 login
 exit
 service password-encryption
 line vty 0 15
 password SenhadaVTY
 transport input ssh
-exec-timeout 9
+exec-timeout 5
 login local
 exit
 vlan 10
-name 10
+name vlan10
 vlan 20
-name 20
-vlan 30
-name 30
-vlan 99
-name native
-exit
-interface vlan 10
-ip address 192.168.2.158 255.255.255.224
-description vlan 10
-interface vlan 20
-ip address 192.168.2.126 255.255.255.128
-description vlan 20
-interface vlan 30
-ip address 192.168.2.174 255.255.255.240
-interface g0/1
-switchport mode trunk
-switchport trunk native vlan 99
-switchport trunk allowed vlan 10,20,30
-exit
-ip default-gateway 192.168.2.1
-interface f0/1
+name vlan20
+vlan 100 
+name GERENCIAMENTO
+interface fastEthernet 0/1
 switchport mode access
 switchport access vlan 10
-description rede-vlan10
-interface f0/2
+description PC1
+interface fastEthernet 0/2
 switchport mode access
 switchport access vlan 20
-description rede-vlan20
-interface f0/3
+description PC2
+interface fastEthernet 0/24
 switchport mode access
-switchport access vlan 30
-description rede-vlan30
+switchport access vlan 100
+description SRV
+interface gigabitEthernet 0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,100
+description TRUNK ROUTER
+interface vlan 100
+ip address 172.16.3.5 255.255.255.224
+interface vlan 100
+ip address 172.16.30 255.255.255.224
+interface vlan 10 
+ip address 172.16.2.138 255.255.255.128
+interface vlan 20
+ip address 172.16.2.10 255.255.255.128
+interface vlan 100
+ip address 172.16.3.29 255.255.255.224
+no shutdown
+ip default-gateway 172.16.2.1
+do wr
+
+-----------------------------------------------------------
+
+
+SW-22
+
+
+enable 
+configure terminal
+hostname SW-22
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS"
+enable secret SenhadaEnable
+username Yohan privilege 15 secret Batata01
+username Augusto privilege 15 secret Batata01
+username Lucas privilege 15 secret Batata01
+username Kaiky privilege 15 secret Batata01
+ip domain-name peachanddaisy.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+login local
+exec-timeout 10
+line vty 0 15
+transport input ssh
+login local
+exec-timeout 10
 exit
+service password-encryption
+ip default-gateway 172.16.3.1
+vlan 10
+name VLAN10
+vlan 20
+name VLAN20
+vlan 100
+name GERENCIAMENTO
+interface fastEthernet 0/1
+switchport mode access
+switchport access vlan 10
+description PC-23
+interface fastEthernet 0/2
+switchport mode access
+switchport access vlan 20
+description PC-24
+interface fastEthernet 0/24
+switchport mode access
+switchport access vlan 100
+description SRV
+interface gigabitEthernet 0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,100
+description TRUNK ROUTER
+interface vlan 10
+ip address 172.16.2.139 255.255.255.128
+interface vlan 20
+ip address 172.16.2.11 255.255.255.128
+interface vlan 100
+ip address 172.16.3.5 255.255.255.224
+interface vlan 100
+ip addres 172.16.3.28 255.255.255.224
+no shutdown
+do wr
+
+-------------------------------------------------------
+
+
+SW-31
+
+
+enable 
+configure terminal
+hostname SW-31
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS"
+enable secret SenhadaEnable
+username Yohan privilege 15 secret Batata01
+username Augusto privilege 15 secret Batata01
+username Lucas privilege 15 secret Batata01
+username Kaiky privilege 15 secret Batata01
+ip domain-name peachanddaisy.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+login local
+exec-timeout 10
+line vty 0 15
+transport input ssh
+login local
+exec-timeout 10
+exit
+service password-encryption
+ip default-gateway 172.16.4.193
+vlan 10
+name VLAN10
+vlan 20
+name VLAN20
+vlan 100
+name GERENCIAMENTO
+interface fastEthernet 0/1
+switchport mode access
+switchport access vlan 10
+description PC-31
+interface fastEthernet 0/2
+switchport mode access
+switchport access vlan 20
+description PC-32
+interface fastEthernet 0/24
+switchport mode access
+switchport access vlan 100
+description SRV
+interface gigabitEthernet 0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,100
+description TRUNK ROUTER
+interface vlan 10
+ip address 172.16.4.138 255.255.255.192
+interface vlan 20
+ip address 172.16.4.10 255.255.255.128
+interface vlan 100
+ip address 172.16.4.197 255.255.255.224
+no shutdown
+do wr
+
+
+------------------------------------------------------------
+
+
+SW-32
+
+enable 
+configure terminal
+hostname SW-32
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS"
+enable secret SenhadaEnable
+username Yohan privilege 15 secret Batata01
+username Augusto privilege 15 secret Batata01
+username Lucas privilege 15 secret Batata01
+username Kaiky privilege 15 secret Batata01
+ip domain-name peachanddaisy.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+login local
+exec-timeout 10
+line vty 0 15
+transport input ssh
+login local
+exec-timeout 10
+exit
+service password-encryption
+ip default-gateway 172.16.4.193
+vlan 10
+name VLAN10
+vlan 20
+name VLAN20
+vlan 100
+name GERENCIAMENTO
+interface fastEthernet 0/1
+switchport mode access
+switchport access vlan 10
+description PC-33
+interface fastEthernet 0/2
+switchport mode access
+switchport access vlan 20
+description PC-34
+interface fastEthernet 0/24
+switchport mode access
+switchport access vlan 100
+description SRV
+interface gigabitEthernet 0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,99,100
+description TRUNK ROUTER
+interface vlan 10
+ip address 172.16.4.139 255.255.255.192
+interface vlan 20
+ip address 172.16.4.11 255.255.255.128
+interface vlan 100
+ip address 172.16.4.197 255.255.255.224
+interface vlan 100
+ip address 172.16.4.220 255.255.255.224
+no shutdown
 do wr
